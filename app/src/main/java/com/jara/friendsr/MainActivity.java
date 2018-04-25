@@ -137,31 +137,47 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(adapter);
     }
 
-    /* Create default friends */
+    /* Create standard friends */
     public void createFriends() {
 
         int id_ross = getResources().getIdentifier("ross", "drawable", "com.jara.friendsr");
-        Friend Ross = new Friend("Ross", "I love dinosaurs", id_ross, true);
+        Friend Ross = new Friend("Ross", "\"We were on a break!\"", id_ross, true);
         friends.add(Ross);
 
         int id_joey = getResources().getIdentifier("joey", "drawable", "com.jara.friendsr");
-        Friend Joey = new Friend("Joey", "I love pizza", id_joey, true);
+        Friend Joey = new Friend("Joey", "\"How YOU doin\'?!\"", id_joey, true);
         friends.add(Joey);
 
-        int id_rachel = getResources().getIdentifier("rachel", "drawable", "com.jara.friendsr");
-        Friend Rachel = new Friend("Rachel", "I love fashion", id_rachel, true);
-        friends.add(Rachel);
-
         int id_monica = getResources().getIdentifier("monica", "drawable", "com.jara.friendsr");
-        Friend Monica = new Friend("Monica", "I love cleaning", id_monica, true);
+        Friend Monica = new Friend("Monica", "\"And remember, if I'm harsh with you it's only because your're doing it wrong.", id_monica, true);
         friends.add(Monica);
 
+        int id_rachel = getResources().getIdentifier("rachel", "drawable", "com.jara.friendsr");
+        Friend Rachel = new Friend("Rachel", "\"Oh, are you setting Ross up with someone? Does she have a wedding dress?\"", id_rachel, true);
+        friends.add(Rachel);
+
         int id_chandler= getResources().getIdentifier("chandler", "drawable", "com.jara.friendsr");
-        Friend Chandler = new Friend("Chandler", "I love jokes", id_chandler, true);
+        Friend Chandler = new Friend("Chandler", "\"I'm not so good with the advice. Can I interest you in a sarcastic comment?\"", id_chandler, true);
         friends.add(Chandler);
 
         int id_phoebe = getResources().getIdentifier("phoebe", "drawable", "com.jara.friendsr");
-        Friend Phoebe = new Friend("Phoebe", "I love massages", id_phoebe, true);
+        Friend Phoebe = new Friend("Phoebe", "\"Smelly cat, smel-ly cat, what are they feeding you? Smelly cat, smel-ly cat, it's not your fault.\"", id_phoebe, true);
         friends.add(Phoebe);
+
+        int id_janice = getResources().getIdentifier("janice", "drawable", "com.jara.friendsr");
+        Friend Janice = new Friend("Janice", "\"Oh. My. Gawd.\"", id_janice, true);
+        friends.add(Janice);
+
+        int id_mike = getResources().getIdentifier("mike", "drawable", "com.jara.friendsr");
+        Friend Mike = new Friend("Mike", "\"First name: Crap. Last name: Bag.\"", id_mike, true);
+        friends.add(Mike);
+
+        int id_gunther = getResources().getIdentifier("gunther", "drawable", "com.jara.friendsr");
+        Friend Gunther = new Friend("Gunther", "\"What's my last name?\"", id_gunther, true);
+        friends.add(Gunther);
+
+        int id_jack = getResources().getIdentifier("jack", "drawable", "com.jara.friendsr");
+        Friend Jack = new Friend("Jack", "\"Son, I had to shave my ears for tonight!\"", id_jack, true);
+        friends.add(Jack);
     }
 }
