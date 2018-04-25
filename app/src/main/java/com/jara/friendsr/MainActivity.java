@@ -4,7 +4,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -15,6 +22,26 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Friend> friends = new ArrayList<>();
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.tool_bar, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        System.out.println("hallo klik");
+
+        // create intent and pass clicked friend through
+        Intent intent = new Intent(MainActivity.this, AddProfileActivity.class);
+        startActivity(intent);
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         // create grid click listener item
         GridItemClickListener gridClick = new GridItemClickListener();
         gridView.setOnItemClickListener(gridClick);
-
     }
 
     /* Directs to the the profile activity of clicked item */
