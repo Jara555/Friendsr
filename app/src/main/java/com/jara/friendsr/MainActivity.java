@@ -1,3 +1,16 @@
+/****************************************************************************
+ * MainActivity.java
+ *
+ * appstudio mprog
+ * Jara Linders
+ * 26-04-2018
+ *
+ * This program implements the Friendsr app for android phones. It uses the
+ * Friend class to create objects which are visualized by the FriendsAdapter
+ * class. The ProfileActivity shows a profile of inidividual Friend objects
+ * and the AddProfileActivity allows users to add a new profile.
+ ***************************************************************************/
+
 package com.jara.friendsr;
 
 import android.content.Intent;
@@ -13,11 +26,12 @@ import android.widget.GridView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    /** MainActivity class implementing the Friendsr app **/
 
     // declare class variable
     ArrayList<Friend> friends = new ArrayList<>();
 
-    /* Sets toolbar */
+    /* Initializes toolbar layout */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -25,66 +39,64 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    /* Initializes main activity */
+    /* Initializes main activity layout */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // create friends
-        if (friends.size() == 0) {
-            createFriends();
-        }
+        // create standard list of friends
+        createFriends();
 
-        // initialize adapter
+        // initialize adapter to load friends in view
         initialzeAdapter();
 
-        // create grid click listener item on gridview
+        // create click listener for items in gridview
         GridView gridView = (GridView) findViewById(R.id.gridView);
         GridItemClickListener gridClick = new GridItemClickListener();
         gridView.setOnItemClickListener(gridClick);
     }
 
-    /* Directs to the the profile activity of the clicked item */
     private class GridItemClickListener implements AdapterView.OnItemClickListener {
+        /** Class for directing to profile activity of clicked item **/
 
+        /* Responds to click on item */
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            // get friend of clicked position
+            // get Friend object of clicked position
             Friend clickedFriend = (Friend) parent.getItemAtPosition(position);
-            System.out.println(clickedFriend.getName());
 
-            // create intent and pass clicked friend through
+            // create intent and pass clicked friend through to ProfileActivity
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             intent.putExtra("clicked_friend", clickedFriend);
             startActivity(intent);
         }
     }
 
-    /* Responds when action button in toolbar is clicked */
+    /* Redirects to AddProfile activity when action button in toolbar is clicked */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // create intent and pass friends list through
+        // create intent and pass friends list through to AddProfile activity
         Intent addFriendIntent = new Intent(MainActivity.this, AddProfileActivity.class);
         addFriendIntent.putExtra("friends", friends);
-
-        // redirect to AddProfile activity
         startActivityForResult(addFriendIntent,1);
 
         return super.onOptionsItemSelected(item);
     }
 
-    /* Returns to this method coming back from AddProfile activity with new friend */
+    /* Returns to this method with result from AddProfile activity */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // update friends
-        friends = (ArrayList<Friend>) data.getSerializableExtra("friends");
+        // if new Friend object is added to friends list: result code is OK
+        if (resultCode == RESULT_OK) {
+            // update friends
+            friends = (ArrayList<Friend>) data.getSerializableExtra("friends");
 
-        // adapter to initialize grid view
-        initialzeAdapter();
+            // add new friend to grid view
+            initialzeAdapter();
+        }
     }
 
     /* Saves information in bundle */
@@ -97,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> new_names = new ArrayList<>();
         int n = friends.size();
 
-        // iterate over friends and store if friend is not standard
+        // iterate over friends and store if Friend object is not standard
         for (int i = 0; i < n; i++) {
             friend = friends.get(i);
             if (!friend.getStandard()) {
@@ -106,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // store names in bundle
+        // store names of non-standard Friend objects in bundle
         outState.putStringArrayList("new_names", new_names);
     }
 
@@ -115,19 +127,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle inState) {
         super.onRestoreInstanceState(inState);
 
-        // get variables
+        // get names of bundle
         ArrayList<String> new_names = inState.getStringArrayList("new_names");
+
         int n = new_names.size();
         Friend friend;
 
-        // iterate over new names and restore new friends
+        // iterate over new names and restore non standard Friend objects to friends list
         for (int i = 0; i < n; i++) {
             friend = (Friend) inState.getSerializable(new_names.get(i));
             friends.add(friend);
         }
     }
 
-    /* Sets adapter to grid view */
+    /* Activates the adapter to visualize grid items in grid */
     public void initialzeAdapter() {
         // find grid view
         GridView gridView = (GridView) findViewById(R.id.gridView);
@@ -148,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
         Friend Joey = new Friend("Joey", "\"How YOU doin\'?!\"", id_joey, true);
         friends.add(Joey);
 
-        int id_monica = getResources().getIdentifier("monica", "drawable", "com.jara.friendsr");
-        Friend Monica = new Friend("Monica", "\"And remember, if I'm harsh with you it's only because your're doing it wrong.", id_monica, true);
-        friends.add(Monica);
-
         int id_rachel = getResources().getIdentifier("rachel", "drawable", "com.jara.friendsr");
         Friend Rachel = new Friend("Rachel", "\"Oh, are you setting Ross up with someone? Does she have a wedding dress?\"", id_rachel, true);
         friends.add(Rachel);
+
+        int id_monica = getResources().getIdentifier("monica", "drawable", "com.jara.friendsr");
+        Friend Monica = new Friend("Monica", "\"And remember, if I'm harsh with you it's only because your're doing it wrong.", id_monica, true);
+        friends.add(Monica);
 
         int id_chandler= getResources().getIdentifier("chandler", "drawable", "com.jara.friendsr");
         Friend Chandler = new Friend("Chandler", "\"I'm not so good with the advice. Can I interest you in a sarcastic comment?\"", id_chandler, true);
