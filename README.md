@@ -4,4 +4,4 @@ This is a social friends app that allows the user to view people’s profiles an
 
 *** Created by Jara555 26-04-2018 ***
 
-![](../master/doc/friendsr.png)
+![](../master/doc/Friendsr.png)
