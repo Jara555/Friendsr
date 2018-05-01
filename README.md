@@ -7,3 +7,5 @@ This is a social friends app that allows the user to view people’s profiles an
 *** Created by Jara555 26-04-2018 ***
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/Jara555/Friendsr?branch=master)](https://bettercodehub.com/)
+
+<img src='https://bettercodehub.com/edge/badge/Jara555/Friendsr?branch=master'>
